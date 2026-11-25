@@ -62,29 +62,26 @@ Calibration of predicted absolute risk at screening ages 50, 55, 60 and 65 years
 
 :::
 
-
-::: {#supptab-metcodes}
+::: {#supptab-tt}
 
 ```{r}
-table_metcodes = read_tsv("manuscript/figures_and_tables/table_metastasis_codes.tsv", col_types = cols(.default = col_character())) %>%
-  mutate(across(everything(), ~ replace_na(.x, "")))
+table_tt = read_tsv("manuscript/figures_and_tables/table_tt.tsv")
 
-ft <- flextable(table_metcodes) %>%
-  fontsize(size = 8, part = "all") %>%
+ft <- flextable(table_tt) %>%
+  fontsize(size = 10, part = "all") %>%
   border_outer(border = fp_border(width = 1)) %>%
   border_inner_h(border = fp_border(width = 0.5)) %>%
   border_inner_v(border = fp_border(width = 0.5)) %>%
-  width(j = c("HUSK", "NFCS", "Code"), width = 0.6) %>%
-  width(j = "Description", width = 4) %>%
+  merge_v(j = c("Cohort", "Cases")) %>%
+  autofit() %>%
   theme_vanilla()
 
 ft
 ```
 
-Distribution of Cancer Registry of Norway metastasis codes among aggressive PCa cases in the HUSK and NFCS analysis cohorts. Aggressive PCa was defined by codes 1, 2, 4, 6 and 7; blank cells indicate no aggressive cases with that code. Each participant receives only one code.
+Hazard ratios and 95% confidence intervals from the extended Cox model for PHS with time-varying effects. The baseline PHS term represents the hazard ratio at age 40; the tt(PHS) term represents the multiplicative change in hazard ratio per additional year of age (linear time transform). Outcome is age at diagnosis of any-stage PCa.
 
 :::
-
 
 ::: {#supptab-qc}
 
@@ -108,47 +105,6 @@ Sensitivity analyses of the PHS hazard ratio (95% CI) per SD increase in PHS, ac
 
 :::
 
-
-::: {#supptab-variants}
-
-```{r}
-table_wgs = read_tsv("manuscript/figures_and_tables/table_variants.tsv")
-
-ft <- flextable(table_wgs) %>%
-  fontsize(size = 8, part = "all") %>%
-  autofit() %>%
-  theme_vanilla()
-
-ft
-```
-
-All variants from genes that we investigated were classified as "Pathogenic" in ClinVar. N is the number of participants carrying this mutation.
-
-:::
-
-
-::: {#supptab-tt}
-
-```{r}
-table_tt = read_tsv("manuscript/figures_and_tables/table_tt.tsv")
-
-ft <- flextable(table_tt) %>%
-  fontsize(size = 10, part = "all") %>%
-  border_outer(border = fp_border(width = 1)) %>%
-  border_inner_h(border = fp_border(width = 0.5)) %>%
-  border_inner_v(border = fp_border(width = 0.5)) %>%
-  merge_v(j = c("Cohort", "Cases")) %>%
-  autofit() %>%
-  theme_vanilla()
-
-ft
-```
-
-Hazard ratios and 95% confidence intervals from the extended Cox model for PHS with time-varying effects. The baseline PHS term represents the hazard ratio at age 40; the tt(PHS) term represents the multiplicative change in hazard ratio per additional year of age (linear time transform). Outcome is age at diagnosis of any-stage PCa.
-
-:::
-
-
 ::: {#supptab-fisher}
 
 ```{r}
@@ -168,7 +124,6 @@ ft
 One-sided Fisher's exact tests of whether the odds of carrying an RPV are greater among cases than controls in the NFCS cohort. P values adjusted using the Benjamini & Hochberg method. OR = Odds ratio, LCB = lower confidence bound.
 
 :::
-
 
 ::: {#supptab-wgs-risk}
 
@@ -198,3 +153,53 @@ flextable(update) %>%
 Cases and cumulative incidence (%) of PCa by age 70 (Kaplan-Meier) in the NFCS participants with whole-genome sequencing, by HOXB13 pathogenic variant carrier status and by PHS group. Low is the bottom 20% of PHS, average the 30-70th percentile, high the top 20%, and top 1.8% the same prevalence as HOXB13 carriers. Cases are all PCa diagnoses during follow-up; "% of cases" is the share of all cases in the sequenced subset. Groups overlap (HOXB13 carriers can also have high PHS), so rows are not independent.
 
 :::
+
+::: {#supptab-metcodes}
+
+```{r}
+table_metcodes = read_tsv("manuscript/figures_and_tables/table_metastasis_codes.tsv", col_types = cols(.default = col_character())) %>%
+  mutate(across(everything(), ~ replace_na(.x, "")))
+
+ft <- flextable(table_metcodes) %>%
+  fontsize(size = 8, part = "all") %>%
+  border_outer(border = fp_border(width = 1)) %>%
+  border_inner_h(border = fp_border(width = 0.5)) %>%
+  border_inner_v(border = fp_border(width = 0.5)) %>%
+  width(j = c("HUSK", "NFCS", "Code"), width = 0.6) %>%
+  width(j = "Description", width = 4) %>%
+  theme_vanilla()
+
+ft
+```
+
+Distribution of Cancer Registry of Norway metastasis codes among aggressive PCa cases in the HUSK and NFCS analysis cohorts. Aggressive PCa was defined by codes 1, 2, 4, 6 and 7; blank cells indicate no aggressive cases with that code. Each participant receives only one code.
+
+:::
+
+
+
+
+::: {#supptab-variants}
+
+```{r}
+table_wgs = read_tsv("manuscript/figures_and_tables/table_variants.tsv")
+
+ft <- flextable(table_wgs) %>%
+  fontsize(size = 8, part = "all") %>%
+  autofit() %>%
+  theme_vanilla()
+
+ft
+```
+
+All variants from genes that we investigated were classified as "Pathogenic" in ClinVar. N is the number of participants carrying this mutation.
+
+:::
+
+
+
+
+
+
+
+
