@@ -318,7 +318,7 @@ Data from the Hordaland Health Studies (HUSK) are administered by the University
 
 ## Code Availability
 
-The scripts to recreate the analysis, figures, and manuscript can be accessed on GitHub at https://github.com/amorris28/heritable_cancer.
+The scripts to recreate the analysis, figures, and manuscript can be accessed on GitHub at https://github.com/ofrei-lab/prostate-cancer-phs-norway.
 
 # Acknowledgments {.unnumbered}
 
